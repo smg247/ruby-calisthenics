@@ -46,16 +46,7 @@ module FunWithStrings
   end
   
   def anagram?(word, other_word)
-    temp_other_word = other_word.clone
-        word.split("").each { |char|
-          if temp_other_word.include? char then
-            temp_other_word.sub!(char, "")
-          else
-            return false
-          end
-        }
-
-        return temp_other_word.length == 0
+    return word.split("").sort == other_word.split("").sort
   end
 end
 
