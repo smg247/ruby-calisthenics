@@ -27,7 +27,35 @@ module FunWithStrings
   end
   
   def anagram_groups
-    # your code here
+    anagrams = []
+    words = tokenize
+    
+    words.each_with_index { |word, index|
+      matches = [word]
+      rest = words[(index + 1)..-1]
+      rest.each { |other_word|
+        if anagram?(word, other_word) then
+          matches.push(other_word)
+        end
+      }
+      
+      anagrams.push(matches)
+    }
+    
+    return anagrams
+  end
+  
+  def anagram?(word, other_word)
+    temp_other_word = other_word.clone
+        word.split("").each { |char|
+          if temp_other_word.include? char then
+            temp_other_word.sub!(char, "")
+          else
+            return false
+          end
+        }
+
+        return temp_other_word.length == 0
   end
 end
 
